@@ -27,3 +27,4 @@ CREATE TABLE Med_Farmacia (
 	Telefone INT NOT NULL,
 	PRIMARY KEY (NIF)
 )
+ggg;
