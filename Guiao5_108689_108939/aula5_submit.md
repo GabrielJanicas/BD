@@ -48,6 +48,7 @@ project ⨝ Pnumber = Pno
 σ works_on.Essn = null
 (works_on ⟖ Essn = Ssn employee)
 )
+
 ```
 
 
@@ -92,27 +93,43 @@ Loc = σDlocation!='Aveiro'∧Plocation='Aveiro' (project ⨝Dnum=Dnumber dept_l
 ### *a)*
 
 ```
-... Write here your answer ...
+π nome,nif,fax,endereco,condpag,tipo (
+σ encomenda.fornecedor = null
+(encomenda ⟖ fornecedor = nif fornecedor)
+)
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+π nome,Avg_unidades (
+produto ⨝ codigo = codProd
+γ codProd;avg(unidades) -> Avg_unidades item
+)
+
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+
+γ ;avg(avg_produtos) -> avg_produtos (γ numEnc; count(codProd) -> avg_produtos (item))
+
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+
+γ fornecedor.nome, produto.nome; sum(item.unidades) -> unidades
+(
+produto ⨝ codigo=codProd 
+item ⨝ numEnc=numero 
+encomenda ⨝ fornecedor=nif fornecedor
+)
+
 ```
 
 
@@ -121,20 +138,27 @@ Loc = σDlocation!='Aveiro'∧Plocation='Aveiro' (project ⨝Dnum=Dnumber dept_l
 ### *a)*
 
 ```
-... Write here your answer ...
+npres = σnumPresc=null (prescricao ⟗ paciente)
+π nome, paciente.numUtente (npres)
+
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+numpres = γespecialidade;count(numPresc)->total (prescricao ⨝ numMedico=numSNS medico)
+π especialidade, total (numpres)
+
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+
+numpres = γendereco;count(numPresc)->total (prescricao ⨝ farmacia=nome farmacia)
+(numpres ⨝ farmacia)
+
 ```
 
 
@@ -153,5 +177,7 @@ Loc = σDlocation!='Aveiro'∧Plocation='Aveiro' (project ⨝Dnum=Dnumber dept_l
 ### *f)* 
 
 ```
-... Write here your answer ...
+presdif = σ medicoDif>1 (γ numUtente; count(numMedico)->medicoDif (πnumUtente, numMedico prescricao))
+π nome (paciente ⨝ paciente.numUtente=prescricao.numUtente presdif)
+
 ```
