@@ -1,4 +1,3 @@
-```sql
 CREATE TABLE Flight(
     Airline int NOT NULL,
     Weekdays int NOT NULL,
@@ -88,4 +87,3 @@ CREATE TABLE Seat(
 	FOREIGN KEY (LegInstanceDate,LegInstanceAirplane_Airplane_id, DepartureAirport, ArrivalAirport, LegInstanceFlight_LegNumber, LegInstanceFlightLeg_FlightNumber ) 
 		REFERENCES Leg_Instance(Date, Airplane_Airplane_id, DepartureAirport, ArrivalAirport, Flight_LegNumber, Flight_FlightNumber),
 );
-```
